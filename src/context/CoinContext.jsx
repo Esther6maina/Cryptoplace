@@ -1,39 +1,47 @@
 import { createContext, useEffect, useState } from "react";
+import axios from 'axios';
 
 export const CoinContext = createContext();
 
-const CoinContextProvider = (props)=>{
+const CoinContextProvider = (props) => {
+  const [allCoin, setAllCoin] = useState([]); 
+  const [currency, setCurrency] = useState({
+    name: "usd",
+    symbol: "$"
+  });
 
-   const [alliCoin, setAllCoin] = useState([]);
-   const [currency, setCurrency] = useState({
-     name: "usd",
-     symbol: "$"
-   });
-
-   const fetchAllCoin = ()=>{
-     const options = {
-      method: 'GET',
-      headers: {accept: 'application/json', 'x-cg-demo-api-key': 'CG-KQGAbcixBecF1BPh1YjELj8k'}
+  useEffect(() => {
+    const fetchAllCoin = async () => {
+      try {
+        const response = await axios.get(`https://api.coingecko.com/api/v3/coins/markets`, {
+          params: {
+            vs_currency: currency.name,
+            order: 'market_cap_desc',
+            per_page: 100,
+            page: 1,
+            sparkline: false,
+          },
+          headers: {
+            accept: 'application/json',
+          },
+        });
+        
+        setAllCoin(response.data); // No need for response.json() with Axios
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
-    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}`, options)
-     .then(response => response.json())
-     .then(response => setAllCoin(response))
-     .catch(err => console.error(err));
-   };
-  
 
-  useEffect(()=>{
     fetchAllCoin();
-  },[currency]);
+  }, [currency]);
 
-
-   const contextValue ={
-    alliCoin,
+  const contextValue = {
+    allCoin,
     currency,
-    setCurrency
-   };
+    setCurrency,
+  };
 
-  return(
+  return (
     <CoinContext.Provider value={contextValue}>
       {props.children}
     </CoinContext.Provider>
