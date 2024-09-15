@@ -31,7 +31,7 @@ const Home = () => {
           <p>#</p>
           <p>Coins</p>
           <p>Price</p>
-          <p style={{ textAlign: 'center' }}>24H Change</p>
+          <p style={{ textAlign: "center" }}>24H Change</p>
           <p className="market-cap">Market Cap</p>
         </div>
       </div>
@@ -45,6 +45,9 @@ const Home = () => {
               <p>{item.name + "-" + item.symbol}</p>
             </div>
             <p>{currency.symbol} {item.current_price}</p>
+            <p>{Math.floor(item.price_change_percentage_24h * 100)}</p>
+
+         
           </div>
         ))
         
