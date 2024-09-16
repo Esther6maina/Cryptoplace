@@ -4,6 +4,7 @@ import Home from './pages/Home/Home'
 import { Routes, Route } from 'react-router-dom'
 import Coin from './pages/Coin/Coin'
 import CoinContextProvider from './context/Coincontext'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
 
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/coin/coinId' element={<Coin/>}/>
       </Routes>
+      <Footer/> 
      </div>
     </CoinContextProvider>       
   );
