@@ -83,7 +83,7 @@
 }
 .header-row {
   display: grid;
-  grid-template-columns: 0.5fr 2fr 1.2fr 1fr 1.5fr; /* Match the header grid to table layout */
+  grid-template-columns: 0.5fr 2fr 1.2fr 1fr 1.5fr; 
   padding: 15px 20px;
   border-bottom: 1px solid #3c3c3c;
   align-items: center;
@@ -107,5 +107,23 @@
 .table-layout .red{
   color: #ff4646;
   text-align: center;
-
+}
+@media (max-width: 768px){
+  .table-layout{
+    grid-template-columns: 0.5fr 2fr 1.2fr 1fr;
+  }
+  .market_cap{
+    display: none;
+  }
+}
+@media (max-width: 500px){
+  .table-layout div img{
+    width: 25px;
+  }
+  .table-layout{
+    font-size: 13px;
+  }
+  .hero form input{
+    width: 100px;
+  }
 }
