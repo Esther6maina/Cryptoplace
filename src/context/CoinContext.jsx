@@ -26,7 +26,7 @@ const CoinContextProvider = (props) => {
           },
         });
         
-        setAllCoin(response.data); // No need for response.json() with Axios
+        setAllCoin(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
