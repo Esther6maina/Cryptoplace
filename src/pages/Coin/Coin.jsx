@@ -33,7 +33,7 @@ const Coin = () => {
     fetchCoinData();
   },[currency])
 
-  if(coinData){
+  if(coinData, historicalData){
     return (
       <div className='coin'>
         <div className="coin-name">
